@@ -1,0 +1,11 @@
+colorScheme = "auto"
+defaultAppearance = "dark"
+autoSwitchAppearance = true
+
+mainSections = ["posts"]
+
+showReadingTime = true
+enableCodeCopy = true
+
+[homepage]
+  layout = "profile"
