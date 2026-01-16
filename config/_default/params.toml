@@ -9,3 +9,26 @@ enableCodeCopy = true
 
 [homepage]
   layout = "profile"
+
+  title = "LithyLabs"
+  subtitle = "Thoughts on software, games, and systems"
+
+  showRecent = true
+  recentLimit = 5
+
+[comments]
+  enabled = true
+  provider = "giscus"
+
+[comments.giscus]
+  repo = "lithylabs/lithylabs.github.io"
+  repoId = "R_kgDOQ6my_w"
+  category = "General"
+  categoryId = "DIC_kwDOQ6my_84C1C4v"
+  mapping = "pathname"
+  strict = "1"
+  reactionsEnabled = "1"
+  emitMetadata = "0"
+  inputPosition = "bottom"
+  theme = "catppuccin_macchiato"
+  lang = "en"
