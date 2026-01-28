@@ -8,13 +8,19 @@ showReadingTime = true
 enableCodeCopy = true
 
 [homepage]
-  layout = "profile"
+  layout = "background"
+  homepageImage = "gear_background.png"
+  logo = "owl_logo.png"
+
 
   title = "LithyLabs"
   subtitle = "Thoughts on software, games, and systems"
 
   showRecent = true
   recentLimit = 5
+
+[article]
+  showComments = true
 
 [comments]
   enabled = true
@@ -30,5 +36,5 @@ enableCodeCopy = true
   reactionsEnabled = "1"
   emitMetadata = "0"
   inputPosition = "bottom"
-  theme = "catppuccin_macchiato"
+  theme = "preferred_color_scheme"
   lang = "en"
