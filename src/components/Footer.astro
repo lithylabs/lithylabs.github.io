@@ -1,0 +1,36 @@
+---
+const currentYear = new Date().getFullYear();
+
+const navLinks = [
+  { text: 'About', href: '/about' },
+  { text: 'Blog', href: '/blog' },
+  { text: 'Tags', href: '/tags' },
+  { text: 'RSS', href: '/rss.xml' },
+];
+---
+
+<footer class="mt-20 border-t border-zinc-100 px-4 py-10 dark:border-zinc-800">
+  <div class="mx-auto flex max-w-3xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <a href="/" class="text-base font-bold text-zinc-900 dark:text-zinc-100">LithyLabs</a>
+      <p class="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        Thoughts on software, games, and systems.
+      </p>
+    </div>
+
+    <nav class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+        >
+          {link.text}
+        </a>
+      ))}
+    </nav>
+  </div>
+
+  <div class="mx-auto mt-8 max-w-3xl text-sm text-zinc-500 dark:text-zinc-500">
+    &copy; {currentYear} LithyLabs.
+  </div>
+</footer>
