@@ -51,11 +51,11 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
           <article class="group relative overflow-hidden rounded-none border-b border-zinc-200 dark:border-zinc-800 pb-6 sm:pb-8">            
             <div class="flex flex-col md:flex-row h-full gap-6 sm:gap-8">
               {sortedPosts[0].data.heroImage && (
-                <div class="w-full md:w-1/2 h-60 sm:h-80 md:h-96 overflow-hidden mx-auto md:mx-0 max-w-full sm:max-w-md">
+                <div class="w-full md:w-1/2 overflow-hidden mx-auto md:mx-0 max-w-full sm:max-w-md">
                   <img
                     src={sortedPosts[0].data.heroImage}
                     alt={sortedPosts[0].data.title}
-                    class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                    class="aspect-[3/2] w-full object-cover transition-all duration-700 group-hover:scale-105"
                     loading="eager"
                   />
                 </div>
@@ -148,7 +148,7 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
                       <img
                         src={post.data.heroImage}
                         alt={post.data.title}
-                        class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                        class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                         loading="lazy"
                       />
                     </div>
