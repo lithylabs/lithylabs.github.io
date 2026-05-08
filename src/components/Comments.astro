@@ -1,0 +1,52 @@
+---
+---
+
+<section class="not-prose mt-12 border-t border-zinc-200 pt-8 dark:border-zinc-800">
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="lithylabs/lithylabs.github.io"
+    data-repo-id="R_kgDOQ6my_w"
+    data-category="Blog Comments"
+    data-category-id="DIC_kwDOQ6my_84C8jCi"
+    data-mapping="pathname"
+    data-strict="1"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="en"
+    crossorigin="anonymous"
+    async
+  >
+  </script>
+
+  <script is:inline>
+    function setGiscusTheme() {
+      const iframe = document.querySelector('iframe.giscus-frame');
+      if (!iframe?.contentWindow) return;
+
+      iframe.contentWindow.postMessage(
+        {
+          giscus: {
+            setConfig: {
+              theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
+            },
+          },
+        },
+        'https://giscus.app',
+      );
+    }
+
+    document.addEventListener('themeChanged', setGiscusTheme);
+    window.addEventListener('message', (event) => {
+      if (event.origin === 'https://giscus.app') {
+        setGiscusTheme();
+      }
+    });
+
+    new MutationObserver(setGiscusTheme).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+  </script>
+</section>

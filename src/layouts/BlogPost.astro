@@ -3,6 +3,7 @@ import Layout from './Layout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import TagList from '../components/TagList.astro';
+import Comments from '../components/Comments.astro';
 import './styles/markdown.css';
 export interface Props {
   title: string;
@@ -104,6 +105,8 @@ if (heroImage) {
         Last updated on <FormattedDate date={updatedDate} />
       </div>
     )}
+
+    <Comments />
   </article>
   
   <slot name="after-article" />
@@ -410,4 +413,3 @@ if (heroImage) {
   
   /* Rest of the styles remain unchanged... */
 </style>
-
