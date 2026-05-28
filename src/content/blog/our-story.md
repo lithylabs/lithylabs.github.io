@@ -2,7 +2,7 @@
 title: "LithyLabs: Our Story"
 description: "The story behind LithyLabs"
 pubDate: 2026-01-15
-heroImage: "/blog/lithylabs-our-story.png"
+heroImage: "/blog/lithylabs-our-story.jpg"
 tags: ["lithy", "lithylabs", "startup", "ai"]
 ---
 

@@ -2,7 +2,7 @@
 title: "The Risky Experiment: Building a Game Without Writing Code"
 description: "Vibing Risk is an experiment in directing AI to build a multiplayer strategy game and learning where that approach works."
 pubDate: 2026-05-12
-heroImage: "/blog/vibing-risk-experiment.png"
+heroImage: "/blog/vibing-risk-experiment.jpg"
 tags: ["vibing-risk", "ai", "software-development", "games"]
 readingTime: "3 min read"
 ---
