@@ -55,7 +55,7 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
                   <img
                     src={sortedPosts[0].data.heroImage}
                     alt={sortedPosts[0].data.title}
-                    class="aspect-[3/2] w-full object-cover transition-all duration-700 group-hover:scale-105"
+                    class="aspect-square w-full object-cover transition-all duration-700 group-hover:scale-105"
                     loading="eager"
                   />
                 </div>
@@ -144,7 +144,7 @@ const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
               {postsByYear[year].map((post, index) => (
                 <article class="group relative flex flex-col h-full mx-auto md:mx-0 w-full max-w-sm sm:max-w-md">
                   {post.data.heroImage && (
-                    <div class="h-48 sm:h-56 overflow-hidden mb-4 rounded-lg">
+                    <div class="aspect-square overflow-hidden mb-4 rounded-lg">
                       <img
                         src={post.data.heroImage}
                         alt={post.data.title}

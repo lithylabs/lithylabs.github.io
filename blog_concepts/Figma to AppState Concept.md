@@ -139,6 +139,8 @@ Code review alone is a poor way to detect this drift, especially when much of th
 - Detailed instruction hierarchy and package-README practices remain outside the draft and in their separate concept.
 - Reviewed the first draft as a journal entry; the writer felt it accurately captured the experience and approved the overall form.
 - The truth pass is complete. A future editing pass can focus on whether every section serves the discovery of `AppState`.
+- Created a 1200×1200 journal hero image using the selected square spiral-notebook design. It uses a small architectural `JOURNAL 01` supertitle, a penciled `Figma to AppState` title, and a three-layer diagram with the middle AppState layer accented.
+- Renamed the lossless source to `Journal Hero Master.png` so every future journal can return to the same visual reference. The post-specific publishing asset remains `Figma to AppState Hero.jpg`.
 
 ## Source material
 

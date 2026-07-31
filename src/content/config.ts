@@ -10,6 +10,8 @@ const blogCollection = defineCollection({
     heroImage: z.string().optional(),
     tags: z.array(z.string()).optional(),
     readingTime: z.string().optional(),
+    type: z.enum(['insight', 'journal']).optional(),
+    journalNumber: z.number().int().positive().optional(),
     draft: z.boolean().optional(),
   }),
 });

@@ -268,6 +268,36 @@ A useful journal image prompt shape is:
 Minimal editorial blog hero image, muted neutral background, subtle notebook-grid texture, abstract wireframe fragments representing [topic], thin monoline strokes, small restrained accent color, calm technical field-notes aesthetic, lots of negative space, no people, no photorealism, no glossy 3D, no dramatic lighting
 ```
 
+### Journal hero image workflow
+
+Journal posts use one low-maintenance image format rather than separate artwork for the website and each social platform.
+
+- Use a 1200×1200 square image as the canonical journal hero.
+- Use the same image on the blog list, article page, and in social metadata. A good-enough shared result is preferable to maintaining platform-specific variants.
+- Keep the important title and diagram content inset from every edge so external previews can crop or reframe the image without losing its meaning.
+- Publish a compressed JPEG. Quality 82 is the current baseline; it preserves the pencil and grid texture while reducing file size substantially.
+
+The reusable visual system is a slightly askew spiral notebook with pale grid paper and a pencil-sketch field-notes aesthetic. Its stable elements are:
+
+- Spiral binding, notebook angle, page framing, and muted palette
+- A small architectural pencil supertitle, such as `JOURNAL 01`, with a thin underline
+- A larger hand-printed pencil article title with no underline
+- A post-specific technical note, wireframe, or flow diagram
+- One restrained faded-amber accent
+
+Use `Journal Hero Master.png` as the permanent lossless ImageGen reference for every new journal. Always return to this original master rather than using the previous journal image as the next reference; otherwise small changes will accumulate across the series.
+
+For each journal:
+
+1. Provide `Journal Hero Master.png` to ImageGen as the reference image.
+2. Preserve the notebook, composition, materials, typography positions, and accent treatment.
+3. Change only the journal number, article title, and post-specific page diagram.
+4. Check the generated number and title carefully; generated text is the most likely element to fail.
+5. Normalize the selected image to 1200×1200.
+6. Export a quality-82 JPEG named for the post, while leaving `Journal Hero Master.png` unchanged.
+
+Create a blank compositing template only if repeated ImageGen edits fail to preserve the journal identity. The current default favors the simpler one-reference workflow.
+
 ### Publishing frontmatter
 
 Published posts should use the existing Astro blog collection in `src/content/blog/`.
