@@ -141,6 +141,12 @@ Code review alone is a poor way to detect this drift, especially when much of th
 - The truth pass is complete. A future editing pass can focus on whether every section serves the discovery of `AppState`.
 - Created a 1200×1200 journal hero image using the selected square spiral-notebook design. It uses a small architectural `JOURNAL 01` supertitle, a penciled `Figma to AppState` title, and a three-layer diagram with the middle AppState layer accented.
 - Renamed the lossless source to `Journal Hero Master.png` so every future journal can return to the same visual reference. The post-specific publishing asset remains `Figma to AppState Hero.jpg`.
+- Prepared the post for publication as `Journal 01: Figma to AppState` at `src/content/blog/journal-01-figma-to-appstate.md` with `draft: false`.
+- Migrated the website's existing blog heroes to 1200×1200 square images and updated the blog list and article layout to use square containers.
+- Added journal metadata support and basic Open Graph/Twitter image metadata using the same square hero asset.
+- The writer visually inspected the local site and approved the result.
+- The pre-publication build passed while the post was still marked as a draft. A final build after exposing the post was requested but not authorized; the local development preview displayed the post successfully.
+- The writer subsequently published the site with `Journal 01: Figma to AppState` as the first public journal entry.
 
 ## Source material
 

@@ -164,16 +164,15 @@ The first draft should prioritize:
 - Enough technical context to understand the stakes
 - A truthful stopping point rather than a manufactured conclusion
 
-### 7. Review in focused passes
+### 7. Review lightly
 
-Reviewing one concern at a time keeps revision manageable:
+A journal is a record of work in progress, not a polished retrospective argument. By default, review it once using a combined question:
 
-1. **Truth:** Is this what happened?
-2. **Theme:** Does each section serve the central movement?
-3. **Reader:** Is enough context provided?
-4. **Voice:** Does it sound like the writer?
-5. **Technical accuracy:** Are the details and terminology correct?
-6. **Editing:** Can the structure, repetition, and wording be tightened?
+> Is this true, clear, technically accurate, and recognizably mine?
+
+Correct factual mistakes, remove distracting repetition, and clarify anything a reader needs in order to follow the experience. Avoid turning each concern into a separate revision pass when the draft already feels honest and understandable. Too much refinement can remove the uncertainty and immediacy that make a journal useful.
+
+Use focused passes only when the draft has a specific problem that needs isolated attention. Insights, which make a more finished claim or argument, are more likely to benefit from separate reviews for truth, theme, reader context, voice, technical accuracy, and editing.
 
 ### 8. Feed discoveries back into the concept space
 
