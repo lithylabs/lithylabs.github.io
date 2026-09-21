@@ -1,4 +1,4 @@
-# Journal 03: Ask, Don't Tell
+d# Journal 03: Ask, Don't Tell
 
 I used to spend a lot of time trying to write the perfect prompt.
 
