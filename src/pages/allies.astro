@@ -36,6 +36,7 @@ const canonicalURL = new URL('/allies', 'https://lithylabs.com');
         <nav aria-label="LithyLabs navigation">
           <a href="/blog">Blog</a>
           <a href="/about">About</a>
+          <a href="/frenemy">Frenemy</a>
         </nav>
       </div>
     </header>
@@ -99,6 +100,7 @@ const canonicalURL = new URL('/allies', 'https://lithylabs.com');
             <p>The AIs won’t respond to persuasion, but they give you room to learn the mechanics. When you find an approach that works, bring it to a human match.</p>
             <p class="challenge"><strong>Will it still work when your opponents see what you’re doing—and work together to stop you?</strong></p>
             <a class="button button-play" href={playURL}>Play Allies</a>
+            <p class="frenemy-link">I’m building these AI players live on stream. <a href="/frenemy">Watch the AI being built <span aria-hidden="true">→</span></a></p>
           </div>
         </div>
       </section>
@@ -176,6 +178,8 @@ const canonicalURL = new URL('/allies', 'https://lithylabs.com');
   .practice .section-number { color: #f1c777; }
   .practice p { color: #d4e0dd; }
   .practice strong { color: #fff7e6; }
+  .frenemy-link { margin-top: 28px; font-size: 16px; }
+  .frenemy-link a { color: #f1c777; font-weight: 700; white-space: nowrap; }
   .challenge { border-left: 2px solid #f1c777; padding-left: 22px; }
   .account-note { font-size: 15px; }
   .button-discord { background: #5865f2; color: #fff; gap: 12px; border-radius: 8px; }

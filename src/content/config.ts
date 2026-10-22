@@ -16,6 +16,28 @@ const blogCollection = defineCollection({
   }),
 });
 
+// One file per Frenemy Game. The body is the short description on /frenemy.
+const frenemyColor = z.enum(['red', 'blue', 'gold', 'green', 'teal', 'purple']);
+
+const frenemyCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    game: z.number().int().positive(),
+    title: z.string(),
+    date: z.date(),
+    // Same choices as the episode's thumbnail.
+    colorA: frenemyColor,
+    colorB: frenemyColor,
+    face: z.enum(['neutral', 'aggressive', 'grudge', 'friendly', 'calculating', 'defensive', 'greedy']),
+    // Leave out until the game is played.
+    result: z.enum(['me', 'ai']).optional(),
+    youtubeId: z.string().optional(),
+    replay: z.string().url().optional(),
+    draft: z.boolean().optional(),
+  }),
+});
+
 export const collections = {
   'blog': blogCollection,
+  'frenemy': frenemyCollection,
 };

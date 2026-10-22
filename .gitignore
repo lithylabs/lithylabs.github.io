@@ -28,3 +28,8 @@ pnpm-debug.log*
 .astro/
 
 .vercel
+
+# Frenemy images made from the templates (they can always be remade)
+/frenemy/exports/
+/frenemy/examples/
+/.claude/launch.json

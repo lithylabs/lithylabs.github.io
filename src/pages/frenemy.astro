@@ -1,0 +1,262 @@
+---
+import { getCollection } from 'astro:content';
+import { SiDiscord, SiYoutube } from 'react-icons/si';
+import FrenemyMascot from '../components/FrenemyMascot.astro';
+import { FRENEMY_COLORS, youtubeThumb, youtubeThumbFallback, youtubeWatch } from '../utils/frenemy';
+
+const playURL = 'https://allies.lithylabs.com';
+const discordURL = 'https://discord.gg/JAGpUPpdp3';
+const channelURL = 'https://www.youtube.com/@JeffreyRefactors';
+const title = 'Building a Frenemy';
+const description = 'Follow the AI players of Allies: The Art of Betrayal as they are built live on stream, game by game.';
+const canonicalURL = new URL('/frenemy', 'https://lithylabs.com');
+
+// The newest games get full cards; older ones get compact cards.
+const FEATURED = 5;
+
+const games = await Promise.all(
+  (await getCollection('frenemy'))
+    .filter((game) => !game.data.draft)
+    .sort((a, b) => b.data.game - a.data.game)
+    .map(async (game) => ({ ...game.data, Content: (await game.render()).Content })),
+);
+
+const myWins = games.filter((g) => g.result === 'me').length;
+const aiWins = games.filter((g) => g.result === 'ai').length;
+const latest = games[0];
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const resultLabel = (result?: 'me' | 'ai') => (result === 'me' ? 'I won' : result === 'ai' ? 'AI won' : 'Upcoming');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta name="twitter:card" content="summary" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;900&display=swap" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="LithyLabs home">
+          <img src="/lithylabs-icon.svg" width="30" height="30" alt="" />
+          LithyLabs
+        </a>
+        <nav aria-label="LithyLabs navigation">
+          <a href="/blog">Blog</a>
+          <a href="/about">About</a>
+          <a href="/allies">Allies</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="frenemy-title">
+        <div class="wrap hero-grid">
+          <div class="panel intro">
+            <h1 id="frenemy-title" class="series">
+              <span class="small">Building a</span>
+              <span class="big"><span class="fren">Fren</span><span class="emy">emy</span></span>
+            </h1>
+            <p>I’m the developer of <em>Allies: The Art of Betrayal</em>, a strategy game of alliances and betrayal, and I’m building its AI players in the open. The goal isn’t one unbeatable AI. It’s a cast of AI players with real personalities, who cooperate when it helps them, compete when it doesn’t, and keep you guessing which one they’ll do next.</p>
+            <p>Every Frenemy Game is a test. I play against the AIs, break down their decisions, and figure out what to improve.</p>
+            <div class="links">
+              <a class="pill pill-play" href={playURL}>Challenge the AI</a>
+              <a class="pill pill-youtube" href={channelURL}><SiYoutube size={20} aria-hidden="true" /> YouTube</a>
+              <a class="pill pill-discord" href={discordURL}><SiDiscord size={20} aria-hidden="true" /> Discord</a>
+            </div>
+          </div>
+
+          <div class="panel score" aria-labelledby="score-title">
+            <h2 id="score-title" class="label">Scoreboard</h2>
+            <div class="score-row">
+              <div class="side">
+                <span class="count count-me">{myWins}</span>
+                <span class="who">Me</span>
+              </div>
+              <span class="vs" aria-hidden="true">vs</span>
+              <div class="side">
+                <span class="count count-ai">{aiWins}</span>
+                <span class="who">AI</span>
+              </div>
+            </div>
+            {latest && (
+              <div class="score-mascot">
+                <FrenemyMascot color={latest.colorA} face={latest.face} size={120} tilt={-12} />
+              </div>
+            )}
+            <p class="score-note">Not the goal, just a way to see if the changes are working.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="games wrap" aria-labelledby="games-title">
+        <h2 id="games-title" class="section-title">Frenemy Games</h2>
+        <ol class="game-list">
+          {games.map((game, i) => {
+            const a = FRENEMY_COLORS[game.colorA];
+            const b = FRENEMY_COLORS[game.colorB];
+            const compact = i >= FEATURED;
+            return (
+              <li class:list={['game', { compact }]} style={`--a: ${a}; --b: ${b};`}>
+                {game.youtubeId ? (
+                  <a class="thumb" href={youtubeWatch(game.youtubeId)} aria-label={`Watch Frenemy Game ${game.game} on YouTube`}>
+                    <img
+                      src={youtubeThumb(game.youtubeId)}
+                      onerror={`this.onerror=null;this.src='${youtubeThumbFallback(game.youtubeId)}'`}
+                      width="1280"
+                      height="720"
+                      loading="lazy"
+                      alt=""
+                    />
+                  </a>
+                ) : (
+                  <div class="thumb thumb-upcoming">
+                    <FrenemyMascot color={game.colorA} face={game.face} size={compact ? 64 : 120} tilt={-12} />
+                  </div>
+                )}
+                <div class="game-body">
+                  <div class="game-head">
+                    <span class="badge" aria-label={`Game ${game.game}`}>{game.game}</span>
+                    <div>
+                      <h3>{game.title}</h3>
+                      <p class="meta">
+                        <time datetime={game.date.toISOString().slice(0, 10)}>{formatDate(game.date)}</time>
+                        <span class:list={['result', game.result ?? 'upcoming']}>{resultLabel(game.result)}</span>
+                      </p>
+                    </div>
+                  </div>
+                  {!compact && <div class="desc"><game.Content /></div>}
+                  <div class="game-links">
+                    {game.youtubeId && <a href={youtubeWatch(game.youtubeId)}>Watch on YouTube <span aria-hidden="true">↗</span></a>}
+                    {game.replay && <a href={game.replay}>Watch the replay in Allies <span aria-hidden="true">↗</span></a>}
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <a href="/">A LithyLabs series</a>
+      <a href="/allies">Allies: The Art of Betrayal</a>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :global(*) { box-sizing: border-box; }
+  :global(html) {
+    background: #141217 url('/frenemy/allies-map.jpg') center top / cover fixed;
+    color: #fff;
+    font-family: 'Rubik', Arial, sans-serif;
+  }
+  :global(body) { margin: 0; min-height: 100vh; background: rgba(15, 14, 18, 0.78); }
+  :global(a) { color: inherit; text-underline-offset: 4px; }
+  :global(a:focus-visible) { outline: 3px solid #D9B24C; outline-offset: 4px; }
+  :global(img), :global(svg) { display: block; max-width: 100%; height: auto; }
+  :global(h1), :global(h2), :global(h3), :global(p) { margin: 0; }
+
+  .wrap { width: min(1120px, calc(100% - 64px)); margin-inline: auto; }
+  .skip-link { position: absolute; left: 16px; top: -100px; z-index: 10; padding: 12px; background: #fff; color: #141217; }
+  .skip-link:focus { top: 12px; }
+
+  .site-header { background: #141217; border-bottom: 1px solid #ffffff1a; }
+  .header-inner { width: min(1280px, calc(100% - 64px)); margin: auto; min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 600; text-decoration: none; }
+  .brand img { background: #f9f6ef; border-radius: 6px; padding: 3px; }
+  nav { display: flex; gap: 28px; font-size: 15px; }
+  nav a { text-decoration: none; color: #d4cedb; }
+  nav a:hover { color: #D9B24C; }
+
+  .panel { background: #1F1F23; border: 5px solid #9C67C9; border-radius: 28px; padding: 36px 40px; }
+
+  .hero { padding: 56px 0 24px; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 32px; align-items: stretch; }
+  .series { display: flex; flex-direction: column; margin-bottom: 20px; }
+  .series .small { font-weight: 600; font-size: 20px; letter-spacing: 5px; text-transform: uppercase; color: #bdb6c4; }
+  .series .big { font-weight: 900; font-size: clamp(64px, 9vw, 104px); line-height: 0.92; letter-spacing: -2px; }
+  .fren { color: #D9B24C; }
+  .emy { color: #9C67C9; }
+  .intro p { font-size: 18px; line-height: 1.6; color: #d4cedb; }
+  .intro p + p { margin-top: 14px; }
+
+  .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .pill { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 14px; font-weight: 600; font-size: 17px; text-decoration: none; transition: filter .15s; }
+  .pill:hover { filter: brightness(1.12); }
+  .pill-play { background: #D9B24C; color: #141014; }
+  .pill-youtube { background: #2a2a30; border: 2px solid #ffffff33; }
+  .pill-discord { background: #5865F2; }
+
+  .score { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; border-color: #D9B24C; }
+  .label { font-weight: 600; font-size: 16px; letter-spacing: 4px; text-transform: uppercase; color: #bdb6c4; }
+  .score-row { display: flex; align-items: center; gap: 18px; }
+  .side { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .count { width: 96px; height: 96px; border-radius: 22px; border: 6px solid #141014; box-shadow: inset 0 0 0 6px rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 52px; text-shadow: 0 3px 0 rgba(0,0,0,0.3); }
+  .count-me { background: #4C8BD8; }
+  .count-ai { background: #D9534F; }
+  .who { font-weight: 900; font-size: 20px; letter-spacing: 2px; text-transform: uppercase; }
+  .vs { font-weight: 900; font-size: 22px; color: #bdb6c4; }
+  .score-note { font-size: 14px; line-height: 1.5; color: #a59fad; }
+
+  .games { padding: 32px 0 72px; }
+  .section-title { font-weight: 900; font-size: 40px; letter-spacing: -1px; margin-bottom: 24px; }
+  .game-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 24px; }
+  .game { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: center; background: #1F1F23; border: 5px solid var(--a); border-radius: 28px; padding: 24px; }
+  .thumb { display: block; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: #141217; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .2s; }
+  a.thumb:hover img { transform: scale(1.03); }
+  .thumb-upcoming { display: flex; align-items: center; justify-content: center; }
+  .game-head { display: flex; align-items: center; gap: 18px; }
+  .badge { width: 72px; height: 72px; flex: none; border-radius: 18px; background: var(--b); border: 5px solid #141014; box-shadow: inset 0 0 0 5px rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 36px; text-shadow: 0 2px 0 rgba(0,0,0,0.3); }
+  .game h3 { font-weight: 900; font-size: 28px; line-height: 1.05; letter-spacing: -.5px; }
+  .meta { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 8px; font-size: 15px; color: #bdb6c4; }
+  .result { font-weight: 600; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 8px; }
+  .result.ai { background: #D9534F33; color: #f0a19e; }
+  .result.me { background: #4C8BD833; color: #9cc3f2; }
+  .result.upcoming { background: #ffffff1a; color: #d4cedb; }
+  .desc { margin-top: 18px; }
+  .desc :global(p) { font-size: 17px; line-height: 1.6; color: #d4cedb; }
+  .game-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 18px; font-weight: 600; font-size: 16px; }
+  .game-links a { color: var(--b); }
+
+  .game.compact { grid-template-columns: 220px minmax(0, 1fr); gap: 20px; padding: 16px; border-width: 3px; border-radius: 20px; }
+  .game.compact .badge { width: 48px; height: 48px; font-size: 24px; border-radius: 12px; border-width: 4px; box-shadow: inset 0 0 0 4px rgba(255,255,255,0.9); }
+  .game.compact h3 { font-size: 20px; }
+  .game.compact .game-links { margin-top: 10px; font-size: 14px; }
+
+  footer { display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid #ffffff1a; padding-block: 28px; color: #a59fad; font-size: 14px; }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .game { grid-template-columns: 1fr; gap: 20px; }
+  }
+  @media (max-width: 700px) {
+    .wrap, .header-inner { width: calc(100% - 32px); }
+    nav { gap: 18px; }
+    .hero { padding-top: 32px; }
+    .panel { padding: 28px 22px; border-width: 4px; }
+    .game { padding: 16px; border-width: 4px; }
+    .game.compact { grid-template-columns: 120px minmax(0, 1fr); }
+    .game.compact .desc { display: none; }
+    .game h3 { font-size: 22px; }
+    footer { flex-direction: column; gap: 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .pill, .thumb img { transition: none; } }
+</style>

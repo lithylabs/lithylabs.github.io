@@ -2,11 +2,19 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import { youtubeThumb, youtubeThumbFallback } from '../utils/frenemy';
 
 const recentPosts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
   .slice(0, 3);
+
+const frenemyGames = (await getCollection('frenemy'))
+  .filter((game) => !game.data.draft)
+  .sort((a, b) => b.data.game - a.data.game);
+const latestGame = frenemyGames[0]?.data;
+const myWins = frenemyGames.filter((g) => g.data.result === 'me').length;
+const aiWins = frenemyGames.filter((g) => g.data.result === 'ai').length;
 ---
 
 <Layout title="LithyLabs" description="Thoughts on software, games, and systems">
@@ -40,6 +48,49 @@ const recentPosts = (await getCollection('blog'))
       </div>
     </div>
   </section>
+
+  {latestGame && (
+    <section class="border-t border-zinc-200 py-12 dark:border-zinc-800">
+      <div class="mb-8 flex items-end justify-between gap-4">
+        <h2 class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+          Latest Frenemy Game
+        </h2>
+        <a href="/frenemy" rel="external" class="text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">
+          All games
+        </a>
+      </div>
+
+      <a href="/frenemy" rel="external" class="group grid gap-6 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:items-center">
+        {latestGame.youtubeId ? (
+          <img
+            src={youtubeThumb(latestGame.youtubeId)}
+            onerror={`this.onerror=null;this.src='${youtubeThumbFallback(latestGame.youtubeId)}'`}
+            width="1280"
+            height="720"
+            loading="lazy"
+            alt=""
+            class="aspect-video w-full rounded-lg object-cover ring-1 ring-zinc-200 transition group-hover:opacity-90 dark:ring-zinc-800"
+          />
+        ) : (
+          <img src="/frenemy/allies-map.jpg" width="1280" height="720" loading="lazy" alt="" class="aspect-video w-full rounded-lg object-cover opacity-60" />
+        )}
+        <div>
+          <p class="mb-2 text-sm font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+            Building a Frenemy · Game {latestGame.game}
+          </p>
+          <h3 class="text-xl font-semibold text-zinc-900 group-hover:text-zinc-700 dark:text-zinc-100 dark:group-hover:text-zinc-300">
+            {latestGame.title}
+          </h3>
+          <p class="mt-2 text-zinc-600 dark:text-zinc-400">
+            I’m building the AI players for my strategy game, Allies, live on stream.
+          </p>
+          <p class="mt-4 text-sm font-medium text-zinc-900 dark:text-zinc-100">
+            Score: Me {myWins} – AI {aiWins}
+          </p>
+        </div>
+      </a>
+    </section>
+  )}
 
   <section class="border-t border-zinc-200 py-12 dark:border-zinc-800">
     <div class="mb-8 flex items-end justify-between gap-4">

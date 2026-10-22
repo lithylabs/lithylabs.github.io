@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Building a Frenemy · stream screen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@600;900&display=swap">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #000; }
+  .screen { width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #141217; font-family: 'Rubik', sans-serif; }
+  .map { position: absolute; left: 0; top: -63px; width: 1920px; height: 1206px; }
+  .shade { position: absolute; inset: 0; background: rgba(15,14,18,0.58); }
+  .panel { position: absolute; top: 70px; background: #1F1F23; border: 5px solid var(--a); border-radius: 28px; }
+  .series { left: 70px; width: 720px; padding: 32px 44px 36px; }
+  .series .small { font-weight: 600; font-size: 22px; letter-spacing: 5px; color: #bdb6c4; }
+  .series .big { font-weight: 900; font-size: 90px; line-height: 0.92; letter-spacing: -2px; }
+  .series .desc { font-weight: 600; font-size: 28px; line-height: 1.35; color: #d4cedb; margin-top: 16px; }
+  .today { right: 70px; width: 920px; padding: 40px 46px; display: flex; align-items: center; gap: 40px; }
+  .badge { width: 160px; height: 160px; flex: none; border-radius: 32px; background: var(--b); border: 7px solid #141014; box-shadow: inset 0 0 0 8px rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 104px; line-height: 1; color: #fff; text-shadow: 0 3px 0 rgba(0,0,0,0.3); }
+  .badge.two { font-size: 90px; }
+  .today .label { font-weight: 600; font-size: 24px; letter-spacing: 5px; color: #bdb6c4; }
+  .today h1 { margin: 6px 0 0; font-weight: 900; font-size: 80px; line-height: 0.95; letter-spacing: -2px; color: #fff; }
+  .middle { position: absolute; left: 0; top: 450px; width: 1920px; display: flex; justify-content: center; align-items: center; gap: 56px; }
+  .mascot { width: 320px; height: 320px; }
+  .status { width: 960px; white-space: nowrap; font-weight: 900; font-size: 120px; line-height: 0.95; letter-spacing: 3px; color: #fff; text-shadow: 0 4px 18px rgba(0,0,0,0.6); }
+  .links { position: absolute; left: 70px; top: 860px; width: 1780px; display: flex; gap: 40px; }
+  .link { flex: 1; height: 150px; background: #1F1F23; border-top: 8px solid var(--c); border-radius: 22px; padding: 0 34px; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+  .link .label { font-weight: 600; font-size: 22px; letter-spacing: 3px; color: #bdb6c4; }
+  .link .url { font-weight: 900; font-size: 36px; color: #fff; display: flex; align-items: center; gap: 14px; }
+  .link .url img { width: 46px; height: 35px; }
+</style>
+</head>
+<body>
+<div class="screen" id="screen">
+  <img class="map" src="assets/allies-map.jpg" alt="">
+  <div class="shade"></div>
+  <div class="panel series">
+    <div class="small">BUILDING A</div>
+    <div class="big"><span style="color: var(--b)">Fren</span><span style="color: var(--a)">emy</span></div>
+    <div class="desc">Building AI frenemies for my strategy game, Allies: The Art of Betrayal. I play them, break down their decisions, and make them better.</div>
+  </div>
+  <div class="panel today">
+    <div class="badge" id="badge"></div>
+    <div>
+      <div class="label">TODAY:</div>
+      <h1 id="title"></h1>
+    </div>
+  </div>
+  <div class="middle">
+    <div class="mascot" id="mascot"></div>
+    <div class="status" id="status"></div>
+  </div>
+  <div class="links">
+    <div class="link" style="--c: var(--b)"><div class="label">FOLLOW THE AI'S PROGRESS</div><div class="url">lithylabs.com/frenemy</div></div>
+    <div class="link" style="--c: var(--a)"><div class="label">CHALLENGE THE AI</div><div class="url">allies.lithylabs.com</div></div>
+    <div class="link" style="--c: #5865F2"><div class="label">JOIN THE DISCUSSION</div><div class="url"><img src="assets/discord-symbol.svg" alt="Discord"><span style="font-size: 34px">discord.gg/JAGpUPpdp3</span></div></div>
+  </div>
+</div>
+<script src="assets/frenemy.js"></script>
+<script>
+  const p = frenemyParams({ game: '1', title: 'The|Baseline', status: 'Starting|Soon', a: 'purple', b: 'teal', face: 'neutral', tilt: '-12' });
+  const root = document.getElementById('screen');
+  root.style.setProperty('--a', p.a);
+  root.style.setProperty('--b', p.b);
+  const badge = document.getElementById('badge');
+  badge.textContent = p.game;
+  if (String(p.game).length > 1) badge.classList.add('two');
+  document.getElementById('title').innerHTML = frenemyLines(p.title);
+  document.getElementById('status').innerHTML = frenemyLines((p.status || '').toUpperCase());
+  const mascot = document.getElementById('mascot');
+  mascot.innerHTML = mascotSVG(p.a, p.face, 320);
+  mascot.style.transform = `rotate(${p.tilt}deg)`;
+</script>
+</body>
+</html>
