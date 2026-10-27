@@ -24,7 +24,7 @@ Each Frenemy Game is one file in `src/content/frenemy/`, e.g. `game-01.md`. It d
 
 ### Before the stream
 
-1. Add `src/content/frenemy/game-NN.md` (copy the last one). Set `game`, `title`, `date`, `colorA`, `colorB`, `face` and a short description as the body. Leave `result` out: the page shows the game as **Upcoming**.
+1. Add `src/content/frenemy/game-NN.md` (copy the last one). Set `game`, `title`, `date`, `colorA`, `colorB`, `face`, `tilt` and a short description as the body. Pick a different `tilt` from the last game (roughly -15 to 15) so the page has variety; use that same angle for all of this game's images. Leave `result` out: the page shows the game as **Upcoming**.
 2. Make the images into `exports/` (see [Exporting PNGs](#exporting-pngs)):
    - `game-NN-thumbnail.png` (1280×720): upload to YouTube.
    - `game-NN-stream-starting.png` and `game-NN-stream-ending.png` (1920×1080): "Starting Soon" and "Thanks for Watching" for OBS.
@@ -49,7 +49,7 @@ Pick five things, then open the templates with them in the URL:
 | `a` | Color A: frame, mascot, "emy" | `purple` |
 | `b` | Color B: "Fren", game badge | `gold` |
 | `face` | Mascot face: the AI behavior being worked on | `grudge` |
-| `tilt` | Mascot angle in degrees (optional) | `-12` |
+| `tilt` | Mascot angle in degrees. Use the episode file's `tilt` on every screen for that game | `-12` |
 | `status` | Stream screen only. Leave empty (`status=`) to use an OBS text source instead | `Starting\|Soon` |
 
 Colors: `red`, `blue`, `gold`, `green`, `teal`, `purple` (any CSS color also works).

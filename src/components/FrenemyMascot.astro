@@ -26,10 +26,9 @@ const faces: Record<string, string> = {
     <path d="M-48,-34 L-14,-32 M14,-46 Q30,-58 48,-44 M-26,40 L26,34" fill="none" stroke="${INK}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`,
   defensive: `<circle cx="-30" cy="-4" r="12" fill="${INK}"/><circle cx="30" cy="-4" r="12" fill="${INK}"/>
     <path d="M-48,-26 L-14,-38 M14,-38 L48,-26 M-32,40 Q-16,30 0,40 Q16,50 32,40" fill="none" stroke="${INK}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`,
-  greedy: `<circle cx="-30" cy="-10" r="15" fill="${INK}"/><circle cx="30" cy="-10" r="15" fill="${INK}"/>
-    <circle cx="-25" cy="-15" r="5" fill="#ffffff"/><circle cx="35" cy="-15" r="5" fill="#ffffff"/>
-    <path d="M-46,-38 Q-30,-48 -14,-38 M14,-38 Q30,-48 46,-38" fill="none" stroke="${INK}" stroke-width="9" stroke-linecap="round"/>
-    <path d="M-42,20 Q0,72 42,20 Z" fill="#ffffff" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>`,
+  greedy: `<text x="-30" y="10" font-family="Rubik, Arial, sans-serif" font-weight="900" font-size="58" text-anchor="middle" fill="${INK}">$</text>
+    <text x="30" y="10" font-family="Rubik, Arial, sans-serif" font-weight="900" font-size="58" text-anchor="middle" fill="${INK}">$</text>
+    <path d="M-28,42 Q4,48 34,30" fill="none" stroke="${INK}" stroke-width="9" stroke-linecap="round"/>`,
 };
 
 const svg = `<svg viewBox="-100 -100 200 200" width="${size}" height="${size}" aria-hidden="true" style="transform: rotate(${tilt}deg)">

@@ -29,6 +29,8 @@ const frenemyCollection = defineCollection({
     colorA: frenemyColor,
     colorB: frenemyColor,
     face: z.enum(['neutral', 'aggressive', 'grudge', 'friendly', 'calculating', 'defensive', 'greedy']),
+    // Mascot angle in degrees. Same on every screen for this game; vary it between games.
+    tilt: z.number(),
     // Leave out until the game is played.
     result: z.enum(['me', 'ai']).optional(),
     youtubeId: z.string().optional(),

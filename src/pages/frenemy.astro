@@ -96,7 +96,7 @@ const resultLabel = (result?: 'me' | 'ai') => (result === 'me' ? 'I won' : resul
             </div>
             {latest && (
               <div class="score-mascot">
-                <FrenemyMascot color={latest.colorA} face={latest.face} size={120} tilt={-12} />
+                <FrenemyMascot color={latest.colorA} face={latest.face} size={120} tilt={latest.tilt} />
               </div>
             )}
             <p class="score-note">Not the goal, just a way to see if the changes are working.</p>
@@ -126,7 +126,7 @@ const resultLabel = (result?: 'me' | 'ai') => (result === 'me' ? 'I won' : resul
                   </a>
                 ) : (
                   <div class="thumb thumb-upcoming">
-                    <FrenemyMascot color={game.colorA} face={game.face} size={compact ? 64 : 120} tilt={-12} />
+                    <FrenemyMascot color={game.colorA} face={game.face} size={compact ? 64 : 120} tilt={game.tilt} />
                   </div>
                 )}
                 <div class="game-body">
